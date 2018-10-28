@@ -17,26 +17,32 @@ var omdb = keys.omdb.id;
 var searchType = process.argv[2];
 var searchTerm = process.argv.slice(3).join(" ");
 
-if (searchType === "concert-this") {
-  concertThis(searchTerm, function () {
-    console.log("concert progress");
-  })
+chooseFunction(searchType, searchTerm);
+
+function chooseFunction(searchType, searchTerm) {
+
+  if (searchType === "concert-this") {
+    concertThis(searchTerm, function () {
+      // console.log("concert progress");
+    })
+  }
+  else if (searchType === "movie-this") {
+    movieThis(searchTerm, function () {
+      // console.log("movie progress");
+    })
+  }
+  else if (searchType === "spotify-this-song") {
+    spotifyThisSong(searchTerm, function () {
+      // console.log("spotify progress");
+    })
+  }
+  else if (searchType === "do-what-it-says") {
+    // console.log("do this console");
+    doThis()
+    // console.log("do it progress");
+  }
 }
-else if (searchType === "movie-this") {
-  movieThis(searchTerm, function () {
-    console.log("movie progress");
-  })
-}
-else if (searchType === "spotify-this-song") {
-  spotifyThisSong(searchTerm, function () {
-    console.log("spotify progress");
-  })
-}
-else if (searchType === "do-what-it-says") {
-  doThis(searchTerm, function () {
-    console.log("do it progress");
-  })
-}
+
 
 function concertThis(searchTerm, callback) {
   var queryUrl = "http://rest.bandsintown.com/artists/" + searchTerm + "/events?app_id=" + bit;
@@ -63,8 +69,6 @@ function concertThis(searchTerm, callback) {
     callback();
   });
 }
-
-
 
 function movieThis(searchTerm, callback) {
   if (!searchTerm) //if no title is defined
@@ -95,41 +99,44 @@ function movieThis(searchTerm, callback) {
   });
 }
 function spotifyThisSong(searchTerm, callback) {
-  if (searchTerm === undefined) {
-    searchTerm === "The Sign"
+  console.log(searchTerm);
+  if (searchTerm.length < 1) {
+    console.log("I saw a sign");
+    searchTerm = "\"" + "The Sign" + "\"";
   }
   else {
-    searchTerm = "\""+searchTerm+"\"";
+    searchTerm = "\"" + searchTerm + "\"";
   }
 
-spotify.search({ type: "track", query: searchTerm, limit: 2 }, function (err, data) {
-  if (err) {
+  spotify.search({ type: "track", query: searchTerm, limit: 2 }, function (err, data) {
+    if (err) {
       return console.log('Error occurred: ' + err);
-  }
-    console.log("Artist: ");
-    // console.log(data.tracks.items[0]);
-    for (let h = 0; h < data.tracks.items.length; h++) {
-      console.log(JSON.stringify(data,  null, 2));
-      console.log(data.tracks.items[h].artists);
-    
-
-    // for (let i = 0; i < data.tracks.items[0].artists.length; i++) {
-    //   console.log(JSON.stringify(data, null, 2));
-
-    //   console.log(data.tracks.items[0].artists[i].name);
-    callback();
+    }
+    for (let i = 0; i < data.tracks.items[0].artists.length; i++) {
+      console.log(data.tracks.items[0].artists[i].name);
     }
 
+    console.log(("Song Name: ") + data.tracks.items[0].name);
+    console.log(("Preview Link: ") + data.tracks.items[0].preview_url);
+    console.log(("Song Album: ") + data.tracks.items[0].album.name);
+
+    callback();
 
   });
-  }
+}
 
+function doThis() {
+  fs.readFile("random.txt", "utf8", function (error, data) {
 
+    // If the code experiences any errors it will log the error to the console.
+    if (error) {
+      return console.log(error);
+    }
 
-  // for (let i = 0; i < body.length; i++) {
-  //   if (parsed[i] != undefined) {
-  //     console.log("\n");
-  //     console.log(parsed[i].venue.name);
+    // Then split it by commas (to make it more readable)
+    var dataArr = data.split(",");
 
+    chooseFunction(dataArr[0], dataArr[1]);
 
-  // console.log(data); 
+  });
+}
