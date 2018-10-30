@@ -70,6 +70,33 @@ function concertThis(searchTerm, callback) {
   });
 }
 
+function spotifyThisSong(searchTerm, callback) {
+  console.log(searchTerm);
+  if (searchTerm.length < 1) {
+    console.log("I saw a sign");
+    searchTerm = "\"" + "The Sign" + "\"";
+  }
+  else {
+    searchTerm = "\"" + searchTerm + "\"";
+  }
+
+  spotify.search({ type: "track", query: searchTerm, limit: 2 }, function (err, data) {
+    if (err) {
+      return console.log('Error occurred: ' + err);
+    }
+    for (let i = 0; i < data.tracks.items[0].artists.length; i++) {
+      console.log(data.tracks.items[0].artists[i].name);
+    }
+
+    console.log(("Song Name: ") + data.tracks.items[0].name);
+    console.log(("Preview Link: ") + data.tracks.items[0].preview_url);
+    console.log(("Song Album: ") + data.tracks.items[0].album.name);
+
+    callback();
+
+  });
+}
+
 function movieThis(searchTerm, callback) {
   if (!searchTerm) //if no title is defined
     searchTerm = "Mr. Nobody";
@@ -96,32 +123,6 @@ function movieThis(searchTerm, callback) {
       console.log("Actors: " + parsed.Actors);
     }
     callback();
-  });
-}
-function spotifyThisSong(searchTerm, callback) {
-  console.log(searchTerm);
-  if (searchTerm.length < 1) {
-    console.log("I saw a sign");
-    searchTerm = "\"" + "The Sign" + "\"";
-  }
-  else {
-    searchTerm = "\"" + searchTerm + "\"";
-  }
-
-  spotify.search({ type: "track", query: searchTerm, limit: 2 }, function (err, data) {
-    if (err) {
-      return console.log('Error occurred: ' + err);
-    }
-    for (let i = 0; i < data.tracks.items[0].artists.length; i++) {
-      console.log(data.tracks.items[0].artists[i].name);
-    }
-
-    console.log(("Song Name: ") + data.tracks.items[0].name);
-    console.log(("Preview Link: ") + data.tracks.items[0].preview_url);
-    console.log(("Song Album: ") + data.tracks.items[0].album.name);
-
-    callback();
-
   });
 }
 
