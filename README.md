@@ -8,6 +8,7 @@ LIRI is a command line node app that takes in parameters and gives you back data
 You will find these resources helpful in order to build off of the existing CLI program
 
  - [Node-Spotify-API](https://www.npmjs.com/package/node-spotify-api)
+ - [Spotify Developer Account](https://developer.spotify.com/my-applications/#!/) - will provide CLIENT     ID & CLIENT SECRET
  - [Request](https://www.npmjs.com/package/request)
  - [OMDB API](http://www.omdbapi.com/) - will need API key
  - [Bands In Town API](http://www.artists.bandsintown.com/bandsintown-api) - will need API key
@@ -93,5 +94,4 @@ Do what it says:
 ![do-what-it-says](https://user-images.githubusercontent.com/40619158/47696133-58406e00-dbd3-11e8-9570-ffc3fac889e5.PNG)
 
 Example of random.txt file format:
-![do-what-it-says-example]
-(<https://user-images.githubusercontent.com/40619158/47696175-976ebf00-dbd3-11e8-9294-707576ab6b47.PNG)>
+![do-what-it-says example](https://user-images.githubusercontent.com/40619158/47696175-976ebf00-dbd3-11e8-9294-707576ab6b47.PNG)
