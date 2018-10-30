@@ -83,8 +83,8 @@ To use each LIRI function - type the following CLI in the format below:
 **Spotify:**
 ![spotify](https://user-images.githubusercontent.com/40619158/47696124-4ced4280-dbd3-11e8-8602-5e9e54d426f0.PNG)
 
-**To See Spotify Functionality:**
-[spotify preview play](https://drive.google.com/file/d/1u_icV0oOGlJ3ci1qdqKAIiMget9upYEL/view)
+**Spotify Preview Song:**
+[preview](https://drive.google.com/file/d/1u_icV0oOGlJ3ci1qdqKAIiMget9upYEL/view)
 
 **OMDB:**
 ![omdb](https://user-images.githubusercontent.com/40619158/47696113-41018080-dbd3-11e8-8b37-d9842a6535b3.PNG)
